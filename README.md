@@ -84,23 +84,7 @@ SubAlign 是一款免费的字幕制作工具，可以自动将你的文稿与�
 
 ## API 接口模式
 
-本项目支持以 HTTP API 服务方式运行，方便其他程序调用。
-
-### 启动 API 服务
-
-```python
-from gui.tools.api_server import start_api_server
-
-# 启动 API 服务（默认端口 5000）
-success, message = start_api_server(host='127.0.0.1', port=5000)
-print(message)
-```
-
-或使用命令行启动：
-
-```bash
-python -c "from gui.tools.api_server import start_api_server; start_api_server()"
-```
+本项目支持以 HTTP API 服务方式运行，方便其他程序调用，直接在设置界面启动即可。
 
 ### 接口说明
 
