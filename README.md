@@ -82,6 +82,99 @@ SubAlign 是一款免费的字幕制作工具，可以自动将你的文稿与�
 
 ---
 
+## API 接口模式
+
+本项目支持以 HTTP API 服务方式运行，方便其他程序调用。
+
+### 启动 API 服务
+
+```python
+from gui.tools.api_server import start_api_server
+
+# 启动 API 服务（默认端口 5000）
+success, message = start_api_server(host='127.0.0.1', port=5000)
+print(message)
+```
+
+或使用命令行启动：
+
+```bash
+python -c "from gui.tools.api_server import start_api_server; start_api_server()"
+```
+
+### 接口说明
+
+#### 1. 音频对齐接口 `/align`
+
+**请求方式**: POST
+
+**请求参数**:
+```json
+{
+    "audio_path": "音频/视频文件路径",
+    "text": "要对齐的文本内容",
+    "format": "返回格式：json(默认) 或 srt"
+}
+```
+
+**请求示例**:
+```bash
+curl -X POST http://127.0.0.1:5000/align \
+  -H "Content-Type: application/json" \
+  -d '{
+    "audio_path": "D:/audio.mp3",
+    "text": "这是一段测试文本",
+    "format": "json"
+  }'
+```
+
+**返回示例 (JSON)**:
+```json
+{
+    "success": true,
+    "result": {
+        "segments": [{
+            "words": [
+                {"word": "这", "start": 0.0, "end": 0.3, "duration": 0.3},
+                {"word": "是", "start": 0.35, "end": 0.6, "duration": 0.25}
+            ]
+        }],
+        "metadata": {
+            "total_duration": 5.2,
+            "word_count": 10,
+            "export_time": "2025-02-03T12:00:00"
+        }
+    }
+}
+```
+
+**返回示例 (SRT)**:
+```json
+{
+    "success": true,
+    "result": "1\n00:00:00,000 --> 00:00:00,300\n这\n\n2\n00:00:00,350 --> 00:00:00,600\n是"
+}
+```
+
+### Python 调用示例
+
+```python
+import requests
+
+# 对齐音频和文本
+response = requests.post('http://127.0.0.1:5000/align', json={
+    'audio_path': 'D:/audio.mp3',
+    'text': '这是一段测试文本',
+    'format': 'srt'
+})
+
+result = response.json()
+if result['success']:
+    print(result['result'])  # SRT 格式字幕
+```
+
+---
+
 ## 设置说明
 
 点击界面左下角的设置按钮（⚙️）可以调整：
@@ -93,10 +186,12 @@ SubAlign 是一款免费的字幕制作工具，可以自动将你的文稿与�
 ---
 
 ## 运行截图
-![1](https://github.com/user-attachments/assets/23566b96-a123-4dd9-919f-bb61da9bf99b)
-![2](https://github.com/user-attachments/assets/d8f94330-52bd-43a2-b322-4a70e7cb0b9b)
-![3](https://github.com/user-attachments/assets/3dc14e84-ab8d-431d-a7d7-ac561336727b)
+![1](https://github.com/user-attachments/assets/50e9fed1-4536-419b-9fb7-67a43fd2b7bc)![2](https://github.com/user-attachments/assets/2eb5fe52-ccd5-44de-92bf-a362149cfdac)![3](https://github.com/user-attachments/assets/226655da-3a54-4aa3-83b3-982ee2522257)
 
+
+
+
+---
 
 ## 开源协议
 
