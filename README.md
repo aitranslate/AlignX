@@ -92,6 +92,12 @@ SubAlign 是一款免费的字幕制作工具，可以自动将你的文稿与�
 
 ---
 
+## 运行截图
+![1](https://github.com/user-attachments/assets/23566b96-a123-4dd9-919f-bb61da9bf99b)
+![2](https://github.com/user-attachments/assets/d8f94330-52bd-43a2-b322-4a70e7cb0b9b)
+![3](https://github.com/user-attachments/assets/3dc14e84-ab8d-431d-a7d7-ac561336727b)
+
+
 ## 开源协议
 
 本项目基于 CC-BY-NC 4.0 协议开源，仅供学习和个人使用。
